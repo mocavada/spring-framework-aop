@@ -25,10 +25,51 @@ public class LoggingAspect {
 
     }
 
-    @AfterReturning(pointcut = "executeLogging()", returning = "returnValue")
-    public void logMethodCall(JoinPoint joinPoint, Object returnValue){
+//    @Before("executeLogging()")
+//    public void logMethodCall(JoinPoint joinPoint){
+//        StringBuilder message = new StringBuilder("Method: ");
+//        message.append(joinPoint.getSignature().getName());
+//        Object[] args = joinPoint.getArgs();
+//        if(null!=args && args.length>0){
+//            message.append(" args=[");
+//            Arrays.asList(args).forEach(arg->{
+//                message.append("arg=").append(arg).append("|");
+//            });
+//        }
+//        LOGGER.info(message.toString());
+//    }
+
+
+//    @AfterReturning(pointcut = "executeLogging()", returning = "returnValue")
+//    public void logMethodCall(JoinPoint joinPoint, Object returnValue){
+//        StringBuilder message = new StringBuilder("Method: ");
+//        message.append(joinPoint.getSignature().getName());
+//        Object[] args = joinPoint.getArgs();
+//        if(null!=args && args.length>0){
+//            message.append(" args=[");
+//            Arrays.asList(args).forEach(arg->{
+//                message.append("arg=").append(arg).append("|");
+//            });
+//        }
+//        if(returnValue instanceof Collection){
+//            message.append(" | returning ").append(((Collection)returnValue).size()).append(" instance(s)");
+//        }else{
+//            message.append(" | returning ").append(returnValue.toString());
+//        }
+//        LOGGER.info(message.toString());
+//        }
+
+
+    @Around("executeLogging()")
+    public Object logMethodCall(ProceedingJoinPoint joinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        Object returnValue = joinPoint.proceed();
+
+        long totalTime = System.currentTimeMillis() - startTime;
+
         StringBuilder message = new StringBuilder("Method: ");
         message.append(joinPoint.getSignature().getName());
+        message.append(" totalTime: ").append(totalTime).append("ms ");
         Object[] args = joinPoint.getArgs();
         if(null!=args && args.length>0){
             message.append(" args=[");
@@ -42,5 +83,6 @@ public class LoggingAspect {
             message.append(" | returning ").append(returnValue.toString());
         }
         LOGGER.info(message.toString());
-        }
+        return returnValue;
+    }
 }
