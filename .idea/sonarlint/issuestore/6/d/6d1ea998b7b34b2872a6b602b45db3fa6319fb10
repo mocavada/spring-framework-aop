@@ -1,0 +1,7 @@
+
+osquid:UselessImportCheck"?Remove this unused import 'org.aspectj.lang.annotation.Before'.(™ Ş¡ÿÿÿÿÿ8ËÒŞ.
+@squid:S2629,"$Invoke method(s) only conditionally.(Ç†«Ãùÿÿÿÿ
+osquid:UselessImportCheck"?Remove this unused import 'org.aspectj.lang.annotation.Around'.(ï°Œşûÿÿÿÿ8ú™Ö.
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¶·½ûÿÿÿÿ
+Csquid:S1602#",Remove useless curly braces around statement(áéŠä
+lsquid:UselessImportCheck"ARemove this unused import 'org.aspectj.lang.ProceedingJoinPoint'.(ç—Âû8¶úª.
